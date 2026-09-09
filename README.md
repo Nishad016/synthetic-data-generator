@@ -1,12 +1,4 @@
----
-title: Synthetic Data Generator
-emoji: 
-colorFrom: blue
-colorTo: purple
-sdk: gradio
-app_file: app.py
-pinned: false
----
+
 
 #  Synthetic Data Generator
 
