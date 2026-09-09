@@ -243,14 +243,15 @@ The generated records are then converted into a tabular DataFrame for easier ins
 ```text
 synthetic-data-generator/
 |
-├── app.py                  # Main Gradio application
-├── requirements.txt        # Python dependencies
-├── .env.example            # Environment variable template
-├── .gitignore              # Git ignore rules
-├── LICENSE                 # Project license
-├── NOTICE                  # Llama attribution
-└── README.md               # Project documentation
-```
+├── images/
+│   └── app-screenshot.png
+├── app.py
+├── requirements.txt
+├── .env.example
+├── .gitignore
+├── LICENSE
+├── NOTICE
+└── README.md
 
 ## Environment Variables
 
