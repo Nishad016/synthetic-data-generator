@@ -272,7 +272,7 @@ with gr.Blocks(
 
     gr.Markdown(
         """
-        # 🧪 Synthetic Data Generator
+        #  Synthetic Data Generator
 
         Generate realistic **synthetic datasets**
         using Meta's **Llama 3.1 8B Instruct** model
@@ -389,4 +389,9 @@ with gr.Blocks(
 # --------------------------------------------------
 
 if __name__ == "__main__":
-    demo.launch()
+    port = int(os.environ.get("PORT", 7860))
+
+    demo.launch(
+        server_name="0.0.0.0",
+        server_port=port
+    )
