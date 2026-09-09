@@ -8,6 +8,10 @@ An AI-powered web application for generating realistic synthetic datasets from a
 
 The application is deployed on Render and uses Hugging Face for Llama inference.
 
+## Application Screenshot
+
+![Synthetic Data Generator Application](images/app-screenshot.png)
+
 ## Features
 
 - AI-powered synthetic dataset generation
