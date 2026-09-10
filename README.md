@@ -4,7 +4,7 @@ An AI-powered web application for generating realistic synthetic datasets from a
 
 ## Live Demo
 
-(https://synthetic-data-generator-44m9.onrender.com)
+https://synthetic-data-generator-44m9.onrender.com
 
 The application is deployed on Render and uses Hugging Face for Llama inference.
 
