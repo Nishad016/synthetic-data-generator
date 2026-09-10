@@ -252,7 +252,7 @@ synthetic-data-generator/
 ├── LICENSE
 ├── NOTICE
 └── README.md
-
+```
 ## Environment Variables
 
 The application requires a Hugging Face access token for model inference.
