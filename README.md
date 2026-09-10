@@ -10,7 +10,7 @@ The application is deployed on Render and uses Hugging Face for Llama inference.
 
 ## Application Screenshot
 
-![Synthetic Data Generator Application](images/Screenshot (1121).png)
+![Synthetic Data Generator Application](images/)
 
 ## Features
 
