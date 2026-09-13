@@ -7,9 +7,7 @@ from dotenv import load_dotenv
 from huggingface_hub import InferenceClient
 
 
-# --------------------------------------------------
-# Configuration
-# --------------------------------------------------
+
 
 load_dotenv()
 
@@ -19,9 +17,7 @@ MODEL_ID = os.getenv(
 )
 
 
-# --------------------------------------------------
-# Prompt strategies
-# --------------------------------------------------
+
 
 PROMPT_STYLES = {
 
@@ -62,9 +58,7 @@ Do not include explanations or markdown.
 }
 
 
-# --------------------------------------------------
-# Hugging Face client
-# --------------------------------------------------
+
 
 def get_client():
 
@@ -83,9 +77,7 @@ def get_client():
     )
 
 
-# --------------------------------------------------
-# JSON extraction
-# --------------------------------------------------
+
 
 def extract_json(text):
 
@@ -104,14 +96,14 @@ def extract_json(text):
         if text.lower().startswith("json"):
             text = text[4:].strip()
 
-    # Try parsing the complete response.
+    
     try:
         return json.loads(text)
 
     except json.JSONDecodeError:
         pass
 
-    # Try extracting the first JSON array.
+    
     start = text.find("[")
     end = text.rfind("]")
 
@@ -126,9 +118,7 @@ def extract_json(text):
     )
 
 
-# --------------------------------------------------
-# Prompt builder
-# --------------------------------------------------
+
 
 def build_prompt(
     domain,
@@ -164,9 +154,7 @@ Do not use real people's private information.
     return prompt
 
 
-# --------------------------------------------------
-# Dataset generation
-# --------------------------------------------------
+
 
 def generate_dataset(
     domain,
@@ -186,13 +174,13 @@ def generate_dataset(
                 "Number of rows must be between 1 and 100."
             )
 
-        # Validate that the schema itself is valid JSON.
+        
         json.loads(schema)
 
-        # Create Hugging Face client.
+        
         client = get_client()
 
-        # Build prompt.
+        
         prompt = build_prompt(
             domain,
             schema,
@@ -201,7 +189,7 @@ def generate_dataset(
             extra_requirements
         )
 
-        # Call Llama.
+        
         response = client.chat.completions.create(
 
             model=MODEL_ID,
@@ -228,20 +216,20 @@ def generate_dataset(
             temperature=float(temperature)
         )
 
-        # Extract model response.
+        
         generated_text = response.choices[0].message.content
 
-        # Convert response into Python data.
+       
         data = extract_json(generated_text)
 
-        # Make sure we received a list.
+        
         if not isinstance(data, list):
             raise ValueError(
                 "The model returned JSON, "
                 "but it was not a JSON array."
             )
 
-        # Convert to Pandas DataFrame.
+        
         dataframe = pd.DataFrame(data)
 
         if dataframe.empty:
@@ -262,9 +250,7 @@ def generate_dataset(
         raise gr.Error(str(error))
 
 
-# --------------------------------------------------
-# Gradio UI
-# --------------------------------------------------
+
 
 with gr.Blocks(
     title="Synthetic Data Generator"
@@ -284,9 +270,7 @@ with gr.Blocks(
 
     with gr.Row():
 
-        # -------------------------
-        # LEFT SIDE
-        # -------------------------
+       
 
         with gr.Column():
 
@@ -344,13 +328,11 @@ with gr.Blocks(
             )
 
             generate_button = gr.Button(
-                "🚀 Generate Dataset",
+                " Generate Dataset",
                 variant="primary"
             )
 
-        # -------------------------
-        # RIGHT SIDE
-        # -------------------------
+      
 
         with gr.Column():
 
@@ -364,7 +346,7 @@ with gr.Blocks(
                 language="json"
             )
 
-    # Button event.
+    
     generate_button.click(
         fn=generate_dataset,
 
@@ -384,9 +366,7 @@ with gr.Blocks(
     )
 
 
-# --------------------------------------------------
-# Run application
-# --------------------------------------------------
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 7860))
